@@ -9,9 +9,7 @@ import { User } from '../_models/user';
 export class AdminService {
   baseUrl = environment.apiUrl + 'admin/';
 
-  constructor(private http: HttpClient) {
-
-  }
+  constructor(private http: HttpClient) {}
 
   getUsersWithRoles() {
     return this.http.get(this.baseUrl + 'usersWithRoles');
@@ -19,5 +17,17 @@ export class AdminService {
 
   updateUserRoles(user: User, roles: {}) {
     return this.http.post(this.baseUrl + 'editRoles/' + user.userName, roles);
+  }
+
+  getPhotosForApproval() {
+    return this.http.get(this.baseUrl + 'photosForModeration');
+  }
+
+  approvePhoto(photoId: number) {
+    return this.http.post(this.baseUrl + 'approvePhoto/' + photoId, {});
+  }
+
+  rejectPhoto(photoId: number) {
+    return this.http.post(this.baseUrl + 'rejectPhoto/' + photoId, {});
   }
 }
